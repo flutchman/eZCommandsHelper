@@ -13,10 +13,10 @@ SRCS := src
 CURRENT_DIR := $(shell pwd)
 SCRIPS_DIR := $(CURRENT_DIR)/scripts
 
-.DEFAULT_GOAL := list
+.DEFAULT_GOAL := help
 
-.PHONY: list
-list:
+.PHONY: help
+help:
 	@echo "******************************"
 	@echo "${YELLOW}Available targets${RESTORE}:"
 	@grep -E '^[a-zA-Z-]+:.*?## .*$$' Makefile | sort | awk 'BEGIN {FS = ":.*?## "}; {printf " ${YELLOW}%-15s${RESTORE} > %s\n", $$1, $$2}'
