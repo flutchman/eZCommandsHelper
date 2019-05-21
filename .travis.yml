@@ -1,0 +1,40 @@
+dist: trusty
+sudo: false
+language: php
+
+services:
+    - docker
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+        - vendor
+
+php:
+    - 7.0
+    - 7.1
+    - 7.2
+
+matrix:
+    include:
+        -   name: "Code Style Check"
+            env: CHECK_CS=1
+
+install:
+    # Disable XDebug for performance
+    - phpenv config-rm xdebug.ini
+    # Get latest composer build
+    - travis_retry composer selfupdate
+    # Avoid memory issues on composer install
+    - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+    # Install packages if needed
+    - if [ "${CHECK_CS}" == "1" ]; then travis_retry composer install --prefer-dist --no-interaction --no-suggest ; fi
+    - composer info -i
+
+script:
+    - if [ "${CHECK_CS}" == "1" ] ; then ./vendor/bin/php-cs-fixer fix -v --dry-run --show-progress=estimating --config=.cs/.php_cs.php ; fi
+    - php vendor/bin/phpcs --standard=.cs/cs_ruleset.xml --extensions=php src/
+
+# reduce depth (history) of git checkout
+git:
+    depth: 30
