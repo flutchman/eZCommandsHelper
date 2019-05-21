@@ -1,0 +1,14 @@
+---
+services:
+    _defaults:
+        autowire: true
+
+    _instanceof:
+        Flutchman\eZCommandsHelper\Core\Command:
+            tags: [flutchman.ezcommands.command]
+
+    # Self
+    Flutchman\eZCommandsHelper\Command\SelfUpdate:
+        calls:
+            - [setParameters, [ {env: "%app_env%", url: "%phar_url%", version: "%phar_version%"}] ]
+

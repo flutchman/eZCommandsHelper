@@ -1,0 +1,27 @@
+---
+parameters:
+    phar_url: ~
+    phar_version: ~
+
+services:
+    _defaults:
+        autowire: true
+
+    Flutchman\eZCommandsHelper\Listener\ApplicationUpdate:
+        arguments:
+            - {env: "%app_env%", dir: "%app_dir%", url: "%ez_phar%", version: "%ez_phar_version%"}
+            - "@project_configuration"
+        tags:
+            - { name: kernel.event_listener, event: console.command, method: onCommandAction }
+
+    Flutchman\eZCommandsHelper\Listener\CommandException:
+        tags:
+            - { name: kernel.event_listener, event: console.error, method: onExceptionAction }
+
+    Flutchman\eZCommandsHelper\Listener\CommandStart:
+        tags:
+            - { name: kernel.event_listener, event: console.command, method: onCommandAction }
+
+    Flutchman\eZCommandsHelper\Listener\CommandTerminate:
+        tags:
+            - { name: kernel.event_listener, event: console.terminate, method: onTerminateAction }
