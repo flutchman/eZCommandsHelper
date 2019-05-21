@@ -1,0 +1,48 @@
+<?php
+
+$header = <<<'EOF'
+@copyright Copyright (C) Flutchman. All rights reserved.
+@license For full copyright and license information view LICENSE file distributed with this source code.
+EOF;
+
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@Symfony' => true,
+        '@Symfony:risky' => true,
+        'concat_space' => ['spacing' => 'one'],
+        'array_syntax' => ['syntax' => 'short'],
+        'simplified_null_return' => false,
+        'phpdoc_align' => false,
+        'phpdoc_to_comment' => false,
+        'cast_spaces' => false,
+        'blank_line_after_opening_tag' => false,
+        'single_blank_line_before_namespace' => false,
+        'space_after_semicolon' => false,
+        'header_comment' => [
+            'commentType' => 'PHPDoc',
+            'header' => $header,
+            'location' => 'after_open',
+            'separate' => 'top',
+        ],
+        'yoda_style' => false,
+        'no_break_comment' => false,
+        'self_accessor' => false,
+        'binary_operator_spaces'      => [
+            'align_equals'       => false,
+            'align_double_arrow' => false,
+        ],
+        'pre_increment'               => false,
+        'ordered_imports'             => true,
+        'phpdoc_order'                => true,
+        'linebreak_after_opening_tag' => true,
+        'phpdoc_no_package'           => false,
+        'phpdoc_inline_tag'           => false,
+        'no_superfluous_phpdoc_tags'  => true,
+    ])
+    ->setRiskyAllowed(true)
+    ->setFinder(
+        PhpCsFixer\Finder::create()
+            ->in(__DIR__ . '/../src')
+            ->files()->name('*.php')
+    )
+;
