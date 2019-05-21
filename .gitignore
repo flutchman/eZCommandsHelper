@@ -1,0 +1,18 @@
+/composer.phar
+/box.phar
+/vendor/
+.php~
+.idea
+.DS_Store
+*~
+*.bak
+._*
+~*
+.php_cs.cache
+
+# Auto-update
+/docs/old.phar
+
+# Travis stuff
+/.travis/ez-cmd-private.pem
+/.travis/secrets.tar
