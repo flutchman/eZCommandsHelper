@@ -1,0 +1,32 @@
+{
+    "banner": "eZ Commands Helper",
+    "chmod": "0755",
+    "compression": "GZ",
+    "compactors": [
+        "Herrera\\Box\\Compactor\\Json",
+        "Herrera\\Box\\Compactor\\Php"
+    ],
+    "directories": [
+        "src",
+        "config"
+    ],
+    "files": [
+        "LICENSE"
+    ],
+    "finder": [
+        {
+            "name": "*.php",
+            "exclude": [
+                "tests",
+                "Tests"
+            ],
+            "in": "vendor"
+        }
+    ],
+    "git-commit": "package_version",
+    "main": "bin/ez-cmd",
+    "algorithm": "OPENSSL",
+    "key": ".travis/ez-cmd-phar-private.pem",
+    "output": "ez-cmd.phar",
+    "stub": true
+}
