@@ -7,7 +7,6 @@
 namespace Flutchman\eZCommandsHelper\Core;
 
 use Flutchman\eZCommandsHelper\Configuration\Project as ProjectConfiguration;
-use Novactive\Collection\Collection;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -37,11 +36,6 @@ abstract class Command extends BaseCommand
      * @var string
      */
     protected $projectPath;
-
-    /**
-     * @var Collection
-     */
-    protected $requiredRecipes;
 
     /**
      * {@inheritdoc}
@@ -88,25 +82,5 @@ abstract class Command extends BaseCommand
     public function getProjectPath()
     {
         return $this->projectPath;
-    }
-
-    /**
-     * @param array $requiredRecipes
-     */
-    public function setRequiredRecipes($requiredRecipes)
-    {
-        $this->requiredRecipes = NovaCollection($requiredRecipes);
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getRequiredRecipes()
-    {
-        if (null === $this->requiredRecipes) {
-            $this->requiredRecipes = NovaCollection([]);
-        }
-
-        return $this->requiredRecipes;
     }
 }
