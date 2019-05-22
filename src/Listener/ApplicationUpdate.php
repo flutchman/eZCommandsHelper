@@ -51,7 +51,7 @@ class ApplicationUpdate
         if (!\in_array(
             $command->getName(),
             [
-                'list', 'help', 'test', 'self-update', 'rollback',
+                'list', 'help', 'self-update', 'rollback',
             ]
         )
         ) {
