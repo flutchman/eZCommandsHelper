@@ -7,6 +7,7 @@
 namespace Flutchman\eZCommandsHelper\Configuration;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
@@ -15,10 +16,25 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     /**
+     * @var ContainerBuilder
+     */
+    private $container;
+
+    /**
+     * Configuration constructor.
+     */
+    public function __construct(ContainerBuilder $container)
+    {
+        $this->container = $container;
+    }
+
+    /**
      * @return TreeBuilder
      */
     public function getConfigTreeBuilder()
     {
+        $c = $this->container;
+
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('ez-cmd');
         $rootNode

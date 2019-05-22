@@ -158,7 +158,7 @@ class Application extends BaseApplication
             $configs[] = Yaml::parse(file_get_contents($localFilePath));
         }
         $processor = new Processor();
-        $configuration = new Configuration();
+        $configuration = new Configuration($this->container);
         $processedConfiguration = $processor->processConfiguration(
             $configuration,
             $configs
