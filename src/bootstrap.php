@@ -14,6 +14,7 @@ if (!file_exists($file)) {
     exit(1);
 }
 include $file;
+include __DIR__ . '/functions.php';
 if ('' != @date_default_timezone_get()) {
     date_default_timezone_set(getDefaultTimeZone());
 }

@@ -7,6 +7,8 @@ services:
         Flutchman\eZCommandsHelper\Core\Command:
             tags: [flutchman.ezcommands.command]
 
+    Flutchman\eZCommandsHelper\Command\Rollback: ~
+
     # Self
     Flutchman\eZCommandsHelper\Command\SelfUpdate:
         calls:

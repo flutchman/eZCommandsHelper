@@ -1,7 +1,7 @@
 ---
 parameters:
-    phar_url: ~
-    phar_version: ~
+    phar_url: 'https://github.com/flutchman/eZCommandsHelper/tree/master/docs/ez-cmd.phar'
+    phar_version: 'https://github.com/flutchman/eZCommandsHelper/tree/master/docs/ez-cmd.phar.version'
 
 services:
     _defaults:
@@ -9,7 +9,7 @@ services:
 
     Flutchman\eZCommandsHelper\Listener\ApplicationUpdate:
         arguments:
-            - {env: "%app_env%", dir: "%app_dir%", url: "%ez_phar%", version: "%ez_phar_version%"}
+            - {env: "%app_env%", dir: "%app_dir%", url: "%phar_url%", version: "%phar_version%"}
             - "@project_configuration"
         tags:
             - { name: kernel.event_listener, event: console.command, method: onCommandAction }

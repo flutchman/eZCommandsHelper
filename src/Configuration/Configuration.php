@@ -21,6 +21,10 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('ez-cmd');
+        $rootNode
+            ->children()
+                ->scalarNode('last_update_check')->defaultNull()->end()
+            ->end();
 
         return $treeBuilder;
     }
