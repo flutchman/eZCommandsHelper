@@ -8,6 +8,7 @@ services:
             tags: [flutchman.ezcommands.command]
 
     Flutchman\eZCommandsHelper\Command\Rollback: ~
+    Flutchman\eZCommandsHelper\Command\SymfonyRun: ~
 
     # Self
     Flutchman\eZCommandsHelper\Command\SelfUpdate:
