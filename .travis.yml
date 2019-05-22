@@ -21,15 +21,15 @@ matrix:
             env: CHECK_CS=1
 
 before_install:
-    - openssl aes-256-cbc -K $encrypted_c98bdfbdc0ce_key -iv $encrypted_c98bdfbdc0ce_iv -in .travis/secrets.tar.enc -out .travis/secrets.tar -d
-
-install:
+    - if [[ $EXECUTE_DEPLOYMENT == 'true' && $TRAVIS_BRANCH == 'master' && $TRAVIS_PULL_REQUEST == 'false' ]]; then openssl aes-256-cbc -K $encrypted_c98bdfbdc0ce_key -iv $encrypted_c98bdfbdc0ce_iv -in .travis/secrets.tar.enc -out .travis/secrets.tar -d; fi
     # Disable XDebug for performance
     - phpenv config-rm xdebug.ini
     # Get latest composer build
     - travis_retry composer selfupdate
     # Avoid memory issues on composer install
     - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+
+install:
     # Install packages if needed
     - if [ "${CHECK_CS}" == "1" ]; then travis_retry composer install --prefer-dist --no-interaction --no-suggest ; fi
     - composer info -i
@@ -37,6 +37,9 @@ install:
 script:
     - if [ "${CHECK_CS}" == "1" ] ; then ./vendor/bin/php-cs-fixer fix -v --dry-run --show-progress=estimating --config=.cs/.php_cs.php ; fi
     - php vendor/bin/phpcs --standard=.cs/cs_ruleset.xml --extensions=php src/
+
+after_success:
+    - if [[ $EXECUTE_DEPLOYMENT == 'true' && $TRAVIS_BRANCH == 'master' && $TRAVIS_PULL_REQUEST == 'false' ]]; then ./scripts/travis_deploy.bash ; fi
 
 # reduce depth (history) of git checkout
 git:
