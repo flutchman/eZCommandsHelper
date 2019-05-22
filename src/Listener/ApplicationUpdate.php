@@ -72,7 +72,7 @@ class ApplicationUpdate
             }
         }
 
-        $localPharFile = 'prod' == $env ? null : $dir . '/docs/ez-cmd.phar';
+        $localPharFile = 'prod' == $env ? null : $dir . 'docs/ez-cmd.phar';
         $updater = new Updater($localPharFile);
         $strategy = $updater->getStrategy();
         if ($strategy instanceof ShaStrategy) {

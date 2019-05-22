@@ -26,7 +26,7 @@ $PHP -d "phar.readonly=false" box.phar build -vvv
 $PHP composer.phar install > /dev/null 2>&1
 shasum ez-cmd.phar > ez-cmd.phar.version
 
-mv ez-cmd.phar ez-cmd.phar.version ez-cmd.phar.pubkey ~/.ezcmd/
+mv ez-cmd.phar ez-cmd.phar.version ez-cmd.phar.pubkey ~/.ez-cmd/
 
 echoSuccess "Done."
 exit 0;
