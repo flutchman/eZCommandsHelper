@@ -30,7 +30,7 @@
     "config": {
         "process-timeout": 3000,
         "platform": {
-            "php": "7.0"
+            "php": "7.2"
         }
     },
     "require-dev": {
@@ -40,8 +40,8 @@
         "squizlabs/php_codesniffer": "^2.9",
         "phpunit/phpunit": "^5.7",
         "behat/behat": "^3.4",
-        "mikey179/vfsStream": "^1.6",
-        "twig/twig": "^1.35",
+        "mikey179/vfsstream": "^1.6",
+        "twig/twig": "^2",
         "symfony/translation": "~3.4",
         "symfony/twig-bridge": "~3.4"
     },
@@ -58,8 +58,7 @@
         "symfony/options-resolver": "~3.4",
         "padraic/phar-updater": "^1.0.6",
         "symfony/event-dispatcher": "~3.4",
-        "nesbot/carbon": "^1.22",
-        "ezsystems/ezplatform": "^2.5"
+        "nesbot/carbon": "^1.22"
     },
     "scripts": {
         "fix-cs": "@php ./vendor/bin/php-cs-fixer fix -v --show-progress=estimating"
