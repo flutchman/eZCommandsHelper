@@ -34,23 +34,20 @@ class Application extends BaseApplication
     /**
      * @var string
      */
-    private static $logo = '<fg=cyan>
-               <fg=yellow>*</>
-       <fg=yellow>*</>             <fg=yellow>*</>
-                    <fg=red>___</>
-              |     <fg=red>| |</>
-    <fg=yellow>*</>        / \    <fg=red>| |</>
-            |<fg=magenta>--o</>|<fg=blue>===</><fg=red>|</><fg=black>-</><fg=red>|</>
-            |<fg=magenta>---</>|   <fg=red>| |</>
-       <fg=yellow>*</>   /     \  <fg=red>| |</>
-          |  <fg=white;options=bold>eZ</>   | <fg=red>| |</>
-          |       |<fg=blue>=</><fg=red>| |</>
-          <fg=white;options=bold>Commands Helper</> <fg=red>| |</>
-          |_______| <fg=red>|<fg=black>_</>|</>
-           |<fg=red;bg=yellow>@</>| |<fg=red;bg=yellow>@</>|  <fg=red>| |</>
-  <fg=green>____\|/___________</><fg=red>|</><fg=green>_</><fg=red>|</><fg=green>_</>
+    private static $logo = '
+      _____    ___                                          _     
+  ___/ _  /   / __\___  _ __ ___  _ __ ___   __ _ _ __   __| |___ 
+ / _ \// /   / /  / _ \| \'_ ` _ \| \'_ ` _ \ / _` | \'_ \ / _` / __|
+|  __// //\ / /__| (_) | | | | | | | | | | | (_| | | | | (_| \__ \
+ \___/____/ \____/\___/|_| |_| |_|_| |_| |_|\__,_|_| |_|\__,_|___/
+                              _                 
+                    /\  /\___| |_ __   ___ _ __ 
+                   / /_/ / _ \ | \'_ \ / _ \ \'__|
+                  / __  /  __/ | |_) |  __/ |   
+                  \/ /_/ \___|_| .__/ \___|_|   
+                               |_|              
 
-    </>';
+';
 
     /**
      * The Container.
