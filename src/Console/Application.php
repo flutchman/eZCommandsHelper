@@ -208,7 +208,8 @@ class Application extends BaseApplication
                 '--config',
                 '-c',
                 InputOption::VALUE_REQUIRED,
-                'use the given file as configuration file, instead of the default one (' . EZ_HOME . '/ez-cmd.yml' . ').'
+                'use the given file as configuration file, instead of the default one (' .
+                    EZ_HOME . '/ez-cmd.yml' . ').'
             )
         );
 
