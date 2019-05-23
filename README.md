@@ -1,7 +1,6 @@
 # eZCommandsHelper
 
 [![Build Status](https://img.shields.io/travis/flutchman/eZCommandsHelper.svg?style=flat-square)](https://travis-ci.org/flutchman/eZCommandsHelper)
-[![Downloads](https://img.shields.io/packagist/dt/flutchman/ez-commands-helper.svg?style=flat-square)](https://packagist.org/packages/flutchman/ez-commands-helper)
 [![Latest release](https://img.shields.io/github/release/flutchman/eZCommandsHelper.svg?style=flat-square)](https://github.com/flutchman/eZCommandsHelper/releases)
 [![License](https://img.shields.io/packagist/l/flutchman/ez-commands-helper.svg?style=flat-square)](LICENSE)
 
