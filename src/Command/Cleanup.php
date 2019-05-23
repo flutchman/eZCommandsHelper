@@ -11,6 +11,7 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class SymfonyRun.
@@ -38,6 +39,7 @@ class Cleanup extends Command
     {
         $output->writeln($this->getApplication()->getLogo());
         $this->io->block('Cleaning public directories');
+        // Getting folder list
         $folderList = $input->getOption('folder') ?
             explode(',', $input->getOption('folder')) :
             $this->projectConfiguration->get('public_dir')
@@ -45,6 +47,8 @@ class Cleanup extends Command
 
         $progressBar = new ProgressBar($output, 100 / \count($folderList));
         $progressBar->setFormat('[%bar%]');
+        // Initiate deletion
+        $fileSystem = new Filesystem();
         foreach ($folderList as $folder) {
             $progressBar->advance();
             $currentFolder = getcwd() . \DIRECTORY_SEPARATOR . $folder;
@@ -52,7 +56,10 @@ class Cleanup extends Command
                 $this->io->text($folder . ' not a folder, moving on.');
                 continue;
             }
+            // Proper deletion
+            $fileSystem->remove($currentFolder);
         }
+        // Cleaning console
         $progressBar->finish();
         $output->writeln('');
         $output->writeln('');

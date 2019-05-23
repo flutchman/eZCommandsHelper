@@ -38,22 +38,25 @@ class SymfonyRun extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln($this->getApplication()->getLogo());
+        // Getting command
         $allArguments = $input->getArgument('sfcommand');
         array_unshift($allArguments, 'bin/console');
-
+        // Creating subprocess to be performed
         $process = new Process(implode(' ', $allArguments));
         $process->start();
+        // Display current command
         $this->io->block(implode(' ', $allArguments));
+        // Add loader
         $progressBar = new ProgressBar($output);
         $progressBar->setFormat('[%bar%]');
         while ($process->isRunning()) {
             $progressBar->advance();
         }
-
+        // Check process ending
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
         }
-
+        // Cleaning console
         $progressBar->finish();
         $output->writeln('');
         $output->writeln('');
