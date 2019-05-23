@@ -29,6 +29,7 @@ class Rollback extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln($this->getApplication()->getLogo());
         $updater = new Updater();
         try {
             $result = $updater->rollback();

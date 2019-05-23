@@ -6,7 +6,6 @@
  */
 namespace Flutchman\eZCommandsHelper\Command;
 
-use Flutchman\eZCommandsHelper\Console\Application;
 use Flutchman\eZCommandsHelper\Core\Command;
 use Humbug\SelfUpdate\Strategy\ShaStrategy;
 use Humbug\SelfUpdate\Updater;
@@ -44,9 +43,7 @@ class SelfUpdate extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $application = $this->getApplication();
-        /* @var Application $application */
-        $output->writeln($application->getLogo());
+        $output->writeln($this->getApplication()->getLogo());
 
         $app_env = $this->parameters['env'];
         $app_dir = $this->appDir;
