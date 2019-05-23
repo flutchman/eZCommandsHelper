@@ -8,7 +8,6 @@ namespace Flutchman\eZCommandsHelper\Listener;
 
 use Flutchman\eZCommandsHelper\Core\Command;
 use Symfony\Component\Console\Event\ConsoleTerminateEvent;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class CommandTerminate.
@@ -22,12 +21,5 @@ class CommandTerminate
         if (!$command instanceof Command) {
             return;
         }
-
-        $fs = new Filesystem();
-        $command->getRequiredRecipes()->each(
-            function ($recipe) use ($fs, $command) {
-                $fs->remove("{$command->getProjectPath()}/{$recipe}.bash");
-            }
-        );
     }
 }

@@ -48,13 +48,7 @@ class ApplicationUpdate
             return;
         }
 
-        if (!\in_array(
-            $command->getName(),
-            [
-                'list', 'help', 'self-update', 'rollback',
-            ]
-        )
-        ) {
+        if (!\in_array($command->getName(), ['list', 'help', 'self-update', 'sfrun', 'rollback'])) {
             $io = new SymfonyStyle($event->getInput(), $event->getOutput());
             $io->error('Unknown command.');
             $event->disableCommand();
