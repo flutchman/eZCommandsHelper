@@ -27,16 +27,10 @@ return PhpCsFixer\Config::create()
         'yoda_style' => false,
         'no_break_comment' => false,
         'self_accessor' => false,
-        'binary_operator_spaces'      => [
-            'align_equals'       => false,
-            'align_double_arrow' => false,
-        ],
         'pre_increment'               => false,
         'ordered_imports'             => true,
         'phpdoc_order'                => true,
         'linebreak_after_opening_tag' => true,
-        'phpdoc_no_package'           => false,
-        'phpdoc_inline_tag'           => false,
         'no_superfluous_phpdoc_tags'  => true,
     ])
     ->setRiskyAllowed(true)
