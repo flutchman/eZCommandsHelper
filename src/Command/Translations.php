@@ -20,7 +20,7 @@ class Translations extends Command
      */
     protected function configure()
     {
-        $this->setName('translate')->setDescription('Initiate assets link.');
+        $this->setName('translate')->setDescription('Initiate js\' translations.');
         $this->setAliases(['3', 'trans', 't']);
     }
 

@@ -49,6 +49,7 @@ class ApplicationUpdate
         }
 
         if (!\in_array($command->getName(), [
+            'all',
             'assets',
             'bundles',
             'cache',

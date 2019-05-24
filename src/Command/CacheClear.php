@@ -21,7 +21,7 @@ class CacheClear extends Command
      */
     protected function configure()
     {
-        $this->setName('cache')->setDescription('Initiate assets link.');
+        $this->setName('cache')->setDescription('Clearing cache.');
         $this->setAliases(['4', 'c', 'cc']);
         $this->addOption(
             'env',
