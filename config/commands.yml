@@ -7,6 +7,7 @@ services:
         Flutchman\eZCommandsHelper\Core\Command:
             tags: [flutchman.ezcommands.command]
 
+    Flutchman\eZCommandsHelper\Command\BundleAssets: ~
     Flutchman\eZCommandsHelper\Command\Cleanup: ~
     Flutchman\eZCommandsHelper\Command\Rollback: ~
     Flutchman\eZCommandsHelper\Command\SymfonyRun: ~

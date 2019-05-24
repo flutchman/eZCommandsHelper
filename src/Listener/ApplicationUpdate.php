@@ -49,6 +49,7 @@ class ApplicationUpdate
         }
 
         if (!\in_array($command->getName(), [
+            'bundles',
             'cleanup',
             'help',
             'list',
@@ -79,11 +80,11 @@ class ApplicationUpdate
         if ($strategy instanceof ShaStrategy) {
             $strategy->setPharUrl($url);
             $strategy->setVersionUrl($version);
-            if ($updater->hasUpdate()) {
-                $io = new SymfonyStyle($event->getInput(), $event->getOutput());
-                $io->note('A new version of eZ Commands Helper is available, please run self-update.');
-                sleep(2);
-            }
+//            if ($updater->hasUpdate()) {
+//                $io = new SymfonyStyle($event->getInput(), $event->getOutput());
+//                $io->note('A new version of eZ Commands Helper is available, please run self-update.');
+//                sleep(2);
+//            }
         }
 
         if (!\in_array($command->getName(), ['list', 'help'])) {

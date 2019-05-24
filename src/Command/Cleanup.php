@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * Class SymfonyRun.
+ * Class Cleanup.
  */
 class Cleanup extends Command
 {
