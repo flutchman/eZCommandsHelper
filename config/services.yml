@@ -17,11 +17,3 @@ services:
     Flutchman\eZCommandsHelper\Listener\CommandException:
         tags:
             - { name: kernel.event_listener, event: console.error, method: onExceptionAction }
-
-    Flutchman\eZCommandsHelper\Listener\CommandStart:
-        tags:
-            - { name: kernel.event_listener, event: console.command, method: onCommandAction }
-
-    Flutchman\eZCommandsHelper\Listener\CommandTerminate:
-        tags:
-            - { name: kernel.event_listener, event: console.terminate, method: onTerminateAction }
