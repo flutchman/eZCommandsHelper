@@ -10,8 +10,6 @@ use Flutchman\eZCommandsHelper\Core\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
 
 /**
  * Class CacheClear.
@@ -24,7 +22,7 @@ class CacheClear extends Command
     protected function configure()
     {
         $this->setName('cache')->setDescription('Initiate assets link.');
-        $this->setAliases(['4', 'cc']);
+        $this->setAliases(['4', 'c', 'cc']);
         $this->addOption(
             'env',
             'e',
@@ -40,20 +38,10 @@ class CacheClear extends Command
     {
         $output->writeln($this->getApplication()->getLogo());
         $this->io->block('Clearing cache');
-        // Getting command
-        $process = new Process('bin/console cache:clear' . $input->getOption('env') ?: '');
-        $process->start();
-        while ($process->isRunning()) {
-            $this->progressBar->advance();
-        }
-        // Check process ending
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
-        // Cleaning console
-        $this->progressBar->finish();
-        $output->writeln('');
-        $output->writeln('');
-        $this->io->success($process->getOutput());
+        $cmd = $this->runProcess(
+            'bin/console cache:clear ' .
+            ($input->getOption('env') ? ('--env=' . $input->getOption('env')) : '')
+        );
+        $this->io->success($cmd);
     }
 }

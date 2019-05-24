@@ -10,8 +10,6 @@ use Flutchman\eZCommandsHelper\Core\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
 
 /**
  * Class SymfonyRun.
@@ -40,23 +38,10 @@ class SymfonyRun extends Command
         // Getting command
         $allArguments = $input->getArgument('sfcommand');
         array_unshift($allArguments, 'bin/console');
-        // Creating subprocess to be performed
-        $process = new Process(implode(' ', $allArguments));
-        $process->start();
         // Display current command
         $this->io->block(implode(' ', $allArguments));
-        // Add loader
-        while ($process->isRunning()) {
-            $this->progressBar->advance();
-        }
-        // Check process ending
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
-        // Cleaning console
-        $this->progressBar->finish();
-        $output->writeln('');
-        $output->writeln('');
-        $this->io->success($process->getOutput());
+        // Creating subprocess to be performed
+        $cmd = $this->runProcess(implode(' ', $allArguments));
+        $this->io->success($cmd);
     }
 }

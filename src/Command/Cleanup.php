@@ -23,7 +23,7 @@ class Cleanup extends Command
     protected function configure()
     {
         $this->setName('cleanup')->setDescription('Public dir deletion');
-        $this->setAliases(['1', 'clean', 'c']);
+        $this->setAliases(['1', 'clean', 'delete', 'd']);
         $this->addOption(
             'folder',
             'f',

@@ -9,8 +9,6 @@ namespace Flutchman\eZCommandsHelper\Command;
 use Flutchman\eZCommandsHelper\Core\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
 
 /**
  * Class BundleAssets.
@@ -33,20 +31,7 @@ class BundleAssets extends Command
     {
         $output->writeln($this->getApplication()->getLogo());
         $this->io->block('Initiate bundle assets');
-        // Getting command
-        $process = new Process('bin/console assets:install --symlink --relative');
-        $process->start();
-        while ($process->isRunning()) {
-            $this->progressBar->advance();
-        }
-        // Check process ending
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
-        // Cleaning console
-        $this->progressBar->finish();
-        $output->writeln('');
-        $output->writeln('');
-        $this->io->success($process->getOutput());
+        $cmd = $this->runProcess('bin/console assets:install --symlink --relative');
+        $this->io->success($cmd);
     }
 }

@@ -12,6 +12,8 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 /**
  * Class Command.
@@ -51,9 +53,6 @@ abstract class Command extends BaseCommand
     {
         $this->io = new SymfonyStyle($input, $output);
         $this->output = $output;
-        $this->progressBar = new ProgressBar($output);
-        $this->progressBar->setFormat('[%bar%]');
-        $this->progressBar->setRedrawFrequency(100);
     }
 
     public function setProjectConfiguration(ProjectConfiguration $configuration)
@@ -101,6 +100,34 @@ abstract class Command extends BaseCommand
     public function setProgressMax($max)
     {
         $this->progressBar = new ProgressBar($this->output, $max);
+        $this->progressBar->setFormat('[%bar%]');
         $this->progressBar->setRedrawFrequency($max > 50000 ? 1000 : 1);
+    }
+
+    /**
+     * @param $processCmd
+     *
+     * @return bool|string
+     */
+    public function runProcess($processCmd)
+    {
+        // Create sub process
+        $process = new Process($processCmd);
+        $process->start();
+        // Add loader
+        $this->setProgressMax(0);
+        while ($process->isRunning()) {
+            $this->progressBar->advance();
+        }
+        // Check process ending
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        // Cleaning console
+        $this->progressBar->finish();
+        $this->output->writeln('');
+        $this->output->writeln('');
+
+        return $process->getOutput();
     }
 }

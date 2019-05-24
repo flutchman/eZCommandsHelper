@@ -10,8 +10,6 @@ use Flutchman\eZCommandsHelper\Core\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
 
 /**
  * Class Assets.
@@ -40,31 +38,11 @@ class Assets extends Command
     {
         $output->writeln($this->getApplication()->getLogo());
         $this->io->block('Generate Webpack assets');
-        // Getting command
         $this->io->text('Installation');
-        $this->runProcess('yarn install', $output);
+        $cmd = $this->runProcess('yarn install');
+        $this->io->success($cmd);
         $this->io->text('Building');
-        $this->runProcess('yarn run ' . $input->getOption('env') ?: 'dev', $output);
-    }
-
-    /**
-     * @param $processCmd
-     */
-    private function runProcess($processCmd, OutputInterface $output)
-    {
-        $process = new Process($processCmd);
-        $process->start();
-        while ($process->isRunning()) {
-            $this->progressBar->advance();
-        }
-        // Check process ending
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
-        // Cleaning console
-        $this->progressBar->finish();
-        $output->writeln('');
-        $output->writeln('');
-        $this->io->success($process->getOutput());
+        $cmd = $this->runProcess('yarn encore ' . ($input->getOption('env') ?: 'dev'));
+        $this->io->success($cmd);
     }
 }
