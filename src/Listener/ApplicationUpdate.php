@@ -55,6 +55,7 @@ class ApplicationUpdate
             'list',
             'self-update',
             'sfrun',
+            'translate',
             'rollback',
         ])) {
             $io = new SymfonyStyle($event->getInput(), $event->getOutput());

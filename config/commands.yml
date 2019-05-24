@@ -11,6 +11,7 @@ services:
     Flutchman\eZCommandsHelper\Command\Cleanup: ~
     Flutchman\eZCommandsHelper\Command\Rollback: ~
     Flutchman\eZCommandsHelper\Command\SymfonyRun: ~
+    Flutchman\eZCommandsHelper\Command\Translations: ~
 
     # Self
     Flutchman\eZCommandsHelper\Command\SelfUpdate:
