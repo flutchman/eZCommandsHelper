@@ -7,6 +7,8 @@ services:
         Flutchman\eZCommandsHelper\Core\Command:
             tags: [flutchman.ezcommands.command]
 
+    # Explicit command definition
+    Flutchman\eZCommandsHelper\Command\Assets: ~
     Flutchman\eZCommandsHelper\Command\BundleAssets: ~
     Flutchman\eZCommandsHelper\Command\CacheClear: ~
     Flutchman\eZCommandsHelper\Command\Cleanup: ~
