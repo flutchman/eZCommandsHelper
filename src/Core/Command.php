@@ -8,6 +8,7 @@ namespace Flutchman\eZCommandsHelper\Core;
 
 use Flutchman\eZCommandsHelper\Configuration\Project as ProjectConfiguration;
 use Symfony\Component\Console\Command\Command as BaseCommand;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -37,12 +38,22 @@ abstract class Command extends BaseCommand
      */
     protected $projectPath;
 
+    /** @var OutputInterface */
+    protected $output;
+
+    /** @var ProgressBar */
+    protected $progressBar;
+
     /**
      * {@inheritdoc}
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->io = new SymfonyStyle($input, $output);
+        $this->output = $output;
+        $this->progressBar = new ProgressBar($output);
+        $this->progressBar->setFormat('[%bar%]');
+        $this->progressBar->setRedrawFrequency(100);
     }
 
     public function setProjectConfiguration(ProjectConfiguration $configuration)
@@ -82,5 +93,14 @@ abstract class Command extends BaseCommand
     public function getProjectPath()
     {
         return $this->projectPath;
+    }
+
+    /**
+     * @param int $max
+     */
+    public function setProgressMax($max)
+    {
+        $this->progressBar = new ProgressBar($this->output, $max);
+        $this->progressBar->setRedrawFrequency($max > 50000 ? 1000 : 1);
     }
 }

@@ -7,7 +7,6 @@
 namespace Flutchman\eZCommandsHelper\Command;
 
 use Flutchman\eZCommandsHelper\Core\Command;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -47,17 +46,15 @@ class SymfonyRun extends Command
         // Display current command
         $this->io->block(implode(' ', $allArguments));
         // Add loader
-        $progressBar = new ProgressBar($output);
-        $progressBar->setFormat('[%bar%]');
         while ($process->isRunning()) {
-            $progressBar->advance();
+            $this->progressBar->advance();
         }
         // Check process ending
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
         }
         // Cleaning console
-        $progressBar->finish();
+        $this->progressBar->finish();
         $output->writeln('');
         $output->writeln('');
         $this->io->success($process->getOutput());

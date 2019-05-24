@@ -7,7 +7,6 @@
 namespace Flutchman\eZCommandsHelper\Command;
 
 use Flutchman\eZCommandsHelper\Core\Command;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -45,13 +44,12 @@ class Cleanup extends Command
             explode(',', $input->getOption('folder')) :
             $this->projectConfiguration->get('public_dir')
         ;
-
-        $progressBar = new ProgressBar($output, 100 / \count($folderList));
-        $progressBar->setFormat('[%bar%]');
+        // Update progress
+        $this->setProgressMax(100 / \count($folderList));
         // Initiate deletion
         $fileSystem = new Filesystem();
         foreach ($folderList as $folder) {
-            $progressBar->advance();
+            $this->progressBar->advance();
             $currentFolder = getcwd() . \DIRECTORY_SEPARATOR . $folder;
             if (!is_dir($currentFolder)) {
                 $this->io->text($folder . ' not a folder, moving on.');
@@ -61,7 +59,7 @@ class Cleanup extends Command
             $fileSystem->remove($currentFolder);
         }
         // Cleaning console
-        $progressBar->finish();
+        $this->progressBar->finish();
         $output->writeln('');
         $output->writeln('');
         $this->io->success('Directories had been deleted');
