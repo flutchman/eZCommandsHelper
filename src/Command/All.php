@@ -33,16 +33,16 @@ class All extends Command
         $output->writeln($this->getApplication()->getLogo());
         $this->io->block('Running all commands');
         // Getting commands
-        $cmd = $this->getApplication()->find('1');
-        $cmd->run(new ArrayInput(['command' => '1']));
-        $cmd = $this->getApplication()->find('2');
-        $cmd->run(new ArrayInput(['command' => '2']));
-        $cmd = $this->getApplication()->find('3');
-        $cmd->run(new ArrayInput(['command' => '3']));
-        $cmd = $this->getApplication()->find('4');
-        $cmd->run(new ArrayInput(['command' => '4']));
-        $cmd = $this->getApplication()->find('5');
-        $cmd->run(new ArrayInput(['command' => '5']));
+        $cmd = $this->getApplication()->find('cleanup');
+        $cmd->run(new ArrayInput(['command' => 'cleanup']), $output);
+        $cmd = $this->getApplication()->find('bundles');
+        $cmd->run(new ArrayInput(['command' => 'bundles']), $output);
+        $cmd = $this->getApplication()->find('translate');
+        $cmd->run(new ArrayInput(['command' => 'translate']), $output);
+        $cmd = $this->getApplication()->find('cache');
+        $cmd->run(new ArrayInput(['command' => 'cache']), $output);
+        $cmd = $this->getApplication()->find('assets');
+        $cmd->run(new ArrayInput(['command' => 'assets']), $output);
         $output->writeln('');
         $output->writeln('');
         $this->io->success('All commands had been runned!');
